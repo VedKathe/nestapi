@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { UserEntity } from '../../auth/entities/user.entity';
 import { Cart } from '../../cart/entities/cart.entity';
 
@@ -8,17 +8,16 @@ export class Order {
   id: string;
 
   @Column()
-  cartId: string;
-
-  @Column()
   createdAt: Date;
 
   @Column()
   status: string;
 
   @ManyToOne(() => UserEntity, user => user.orders)
+  @JoinColumn()
   user: UserEntity;
 
   @ManyToOne(() => Cart, cart => cart.orders)
+  @JoinColumn()
   cart: Cart;
 }
