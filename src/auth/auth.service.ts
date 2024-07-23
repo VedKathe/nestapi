@@ -48,8 +48,8 @@ export class AuthService {
         const user = await this.usersRepository.create({
           username,
           email,
-          password: hashedPassword
-          
+          password: hashedPassword,
+          role
         });
     
         try {
@@ -70,7 +70,7 @@ export class AuthService {
         return { token , role:user.role };
       }
 
-    async login(loginDto: LoginDto): Promise<{ token: string , role: string}> {
+    async login(loginDto: LoginDto): Promise<{ token: string , user: any}> {
         const { email, password } = loginDto;
     
         const user = await this.usersRepository.findOne({
@@ -89,8 +89,13 @@ export class AuthService {
     
         const token = this.jwtService.sign({ id: user.id });
         
+        const userData = {
+          id: user.id,
+          username: user.username,
+          role:user.role
+        }
 
 
-        return { token , role:user.role };
+        return { token , user:userData };
       }
 }

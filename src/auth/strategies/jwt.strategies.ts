@@ -14,6 +14,6 @@ export class JwtStrategies extends PassportStrategy(Strategy){
 
     validate(payload:any){
 
-        return payload;
+        return true;
     }
 }
