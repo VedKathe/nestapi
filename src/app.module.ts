@@ -11,18 +11,20 @@ import { CartItem } from './cart/entities/cart-item.entity';
 import { Cart } from './cart/entities/cart.entity';
 import { Order } from './orders/entities/order.entity';
 import { Product } from './products/entities/product.entity';
+import { OrderItem } from './orders/entities/order_items.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'ep-damp-sun-a1vvdcup-pooler.ap-southeast-1.aws.neon.tech',
       port: 5432,
-      password: 'root',
-      username: 'postgres',
-      entities: [UserEntity,CartItem,Cart,Order,Product],
-      database: 'postgres',
+      password: '0wKRMJSP1GqV',
+      username: 'vmkathe',
+      entities: [UserEntity,CartItem,Cart,Order,Product,OrderItem],
+      database: 'nestjs',
       synchronize: true,
       logging: true,
+      ssl:true
     })
     ,AuthModule, ProductsModule, CartModule, OrdersModule],
   controllers: [AppController],

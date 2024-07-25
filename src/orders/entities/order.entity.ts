@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { UserEntity } from '../../auth/entities/user.entity';
 import { Cart } from '../../cart/entities/cart.entity';
+import { OrderItem } from './order_items.entity';
 
 @Entity('orders')
 export class Order {
@@ -17,7 +18,6 @@ export class Order {
   @JoinColumn()
   user: UserEntity;
 
-  @ManyToOne(() => Cart, cart => cart.orders)
-  @JoinColumn()
-  cart: Cart;
+  @OneToMany(() => OrderItem, orderItem => orderItem.order, { cascade: true, onDelete: 'CASCADE' })
+  orderItems: OrderItem[];
 }

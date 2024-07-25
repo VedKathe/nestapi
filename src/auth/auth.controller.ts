@@ -28,9 +28,12 @@ export class AuthController {
   }
 
   @Post('signup')
-  signUp(@Body() user: User): Promise<{ token: string }> {
-
-   
+  signUp(@Body() user: User): Promise<{ token: string , user }> {
     return this.authService.signUp(user);
+  }
+
+  @Post('signupAdmin')
+  signUpAdmin(@Body() user: User): Promise<{ token: string , user }> {
+    return this.authService.signUpAdmin(user);
   }
 }
