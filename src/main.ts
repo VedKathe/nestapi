@@ -15,7 +15,7 @@ async function bootstrap() {
       'https://www.example.com',
       'https://app.example.com',
     ],
-    methods: ["GET", "POST"],
+    methods: ['*'],
     credentials: true,
   });
   app.use(cookieParser());
