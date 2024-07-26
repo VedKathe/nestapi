@@ -5,6 +5,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: [
+      'https://acomm.netlify.app',
+      'http://localhost:4200',
       'http://localhost:3000',
       'http://example.com',
       'http://www.example.com',
