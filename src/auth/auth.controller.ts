@@ -28,12 +28,18 @@ export class AuthController {
   }
 
   @Post('signup')
-  signUp(@Body() user: User): Promise<{ token: string , user }> {
+  signUp(@Body() user: User):  Promise<{ success:boolean }> {
     return this.authService.signUp(user);
   }
 
   @Post('signupAdmin')
   signUpAdmin(@Body() user: User): Promise<{ token: string , user }> {
     return this.authService.signUpAdmin(user);
+  }
+
+  @Post('verify')
+  async verfiyUser(@Body() confirmationData: {token:string}){
+    const email = await this.authService.decodeConfirmationToken(confirmationData.token);
+    await this.authService.confirmEmail(email);
   }
 }

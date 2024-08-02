@@ -12,6 +12,9 @@ import { Cart } from './cart/entities/cart.entity';
 import { Order } from './orders/entities/order.entity';
 import { Product } from './products/entities/product.entity';
 import { OrderItem } from './orders/entities/order_items.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { join } from 'path';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -23,10 +26,10 @@ import { OrderItem } from './orders/entities/order_items.entity';
       entities: [UserEntity,CartItem,Cart,Order,Product,OrderItem],
       database: 'nestjs',
       synchronize: true,
-      logging: true,
       ssl:true
     })
-    ,AuthModule, ProductsModule, CartModule, OrdersModule],
+    ,AuthModule, ProductsModule, CartModule, OrdersModule,
+   ],
   controllers: [AppController],
   providers: [AppService],
 })

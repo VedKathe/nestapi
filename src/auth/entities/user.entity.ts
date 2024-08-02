@@ -29,6 +29,9 @@ export class UserEntity {
    */
   role: string;
 
+  @Column({ default: false })
+  public isEmailConfirmed: boolean;
+
   @OneToOne(() => Cart, cart => cart.user)
   cart: Cart;
 
