@@ -49,23 +49,23 @@ export class AuthService {
     const role = 'u'
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // const user = await this.usersRepository.create({
-    //   username,
-    //   email,
-    //   password: hashedPassword,
-    //   role
-    // });
+    const user = await this.usersRepository.create({
+      username,
+      email,
+      password: hashedPassword,
+      role
+    });
 
-    // try {
-    //   await this.usersRepository.save(user);
-    // } catch (error) {
-    //   // Check if the error is a duplicate key error
-    //   if (error.code === '23505') { // PostgreSQL unique violation error code
-    //     throw new ConflictException('Username or email already exists');
-    //   } else {
-    //     throw error; // Rethrow other types of errors
-    //   }
-    // }
+    try {
+      await this.usersRepository.save(user);
+    } catch (error) {
+      // Check if the error is a duplicate key error
+      if (error.code === '23505') { // PostgreSQL unique violation error code
+        throw new ConflictException('Username or email already exists');
+      } else {
+        throw error; // Rethrow other types of errors
+      }
+    }
 
     const token = this.jwtService.sign({ email:email });
 
